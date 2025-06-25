@@ -7,8 +7,70 @@
       duration: 0.5
       position: [0, 0]
     - type: ImageStimulus
-      image_paths_from:"[stimuli[0], st]"
+      image_paths_from: "[stimuli[0], stimuli[1]]"
+      position: [[-300, 0], [0, 300]]
+      height: 200
+      width: 200
+      duration: 0.01
     - type: ActionStimulus
-      duration: 1.0
+      duration: 2.0
       key_dict_from: key_dict
-      timeout_action: 1
+1:
+  steps:
+  - type: BaseStimulus
+    name: isi
+    duration: 0.25
+  - type: ImageStimulus
+    image_paths_from: "[stimuli[0], stimuli[1]]"
+    position: [[-300, 0], [0, 300]]
+    height: 200
+    width: 200
+    duration: 0.01
+  - type: ActionStimulus
+    duration: 2.0
+    key_dict_from: key_dict
+2:
+  steps:
+  - type: BaseStimulus
+    name: isi
+    duration: 0.25
+  - type: ImageStimulus
+    image_paths_from: "[stimuli[0], stimuli[1]]"
+    position: [[-300, 0], [0, 300]]
+    height: 200
+    width: 200
+    duration: 0.01
+  - type: ActionStimulus
+    duration: 2.0
+    key_dict_from: key_dict
+3:
+  steps:
+  - type: ImageStimulus
+    image_paths_from: "[stimuli[0]]"
+    position: [0, 0]
+    height: 200
+    width: 200
+    duration: 1
+  steps:
+  - type: ImageStimulus
+    image_paths_from: "[stimuli[0]]"
+    position: [0, 0]
+    height: 200
+    width: 200
+    duration: 1
+5:
+  steps:
+  - type: ImageStimulus
+    image_paths_from: "[stimuli[0]]"
+    position: [0, 0]
+    height: 200
+    width: 200
+    duration: 1
+6:
+  steps:
+  - type: ImageStimulus
+    image_paths_from: "[stimuli[0]]"
+    position: [0, 0]
+    height: 200
+    width: 200
+    duration: 1
