@@ -1,0 +1,14 @@
+0:
+  steps:
+    - type: TextStimulus
+      name: initial_fix
+      text: +
+      autodraw: True
+      duration: 0.5
+      position: [0, 0]
+    - type: ImageStimulus
+      image_paths_from:"[stimuli[0], st]"
+    - type: ActionStimulus
+      duration: 1.0
+      key_dict_from: key_dict
+      timeout_action: 1

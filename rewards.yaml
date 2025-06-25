@@ -1,0 +1,17 @@
+3:
+  class: BaseReward
+  reward: 1
+  p: 0.8
+
+4:
+  class: PseudoRandomReward
+  reward_list: [-1, -1, -1, -1, -1, -1, -1, -1, 0, 0]
+
+5:
+  class: DriftingReward
+  reward: [1, 0]
+  borders: [0.25, 0.75]
+
+6:
+  class: PseudoRandomReward
+  reward_list: [1, 1, 0, 0, 0, 0, 0, 0, 0, 0]
