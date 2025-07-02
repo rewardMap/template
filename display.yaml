@@ -1,76 +1,86 @@
-0:
-  steps:
-    - type: TextStimulus
-      name: initial_fix
-      text: +
-      autodraw: True
-      duration: 0.5
-      position: [0, 0]
-    - type: ImageStimulus
-      image_paths_from: "[stimuli[0], stimuli[1]]"
-      position: [[-300, 0], [0, 300]]
-      height: 200
-      width: 200
-      duration: 0.01
-    - type: ActionStimulus
-      duration: 2.0
-      key_dict_from: key_dict
-1:
-  steps:
-  - type: BaseStimulus
-    name: isi
-    duration: 0.25
-  - type: ImageStimulus
-    image_paths_from: "[stimuli[0], stimuli[1]]"
-    position: [[-300, 0], [0, 300]]
-    height: 200
-    width: 200
-    duration: 0.01
-  - type: ActionStimulus
-    duration: 2.0
-    key_dict_from: key_dict
-2:
-  steps:
-  - type: BaseStimulus
-    name: isi
-    duration: 0.25
-  - type: ImageStimulus
-    image_paths_from: "[stimuli[0], stimuli[1]]"
-    position: [[-300, 0], [0, 300]]
-    height: 200
-    width: 200
-    duration: 0.01
-  - type: ActionStimulus
-    duration: 2.0
-    key_dict_from: key_dict
-3:
-  steps:
-  - type: ImageStimulus
-    image_paths_from: "[stimuli[0]]"
-    position: [0, 0]
-    height: 200
-    width: 200
-    duration: 1
-  steps:
-  - type: ImageStimulus
-    image_paths_from: "[stimuli[0]]"
-    position: [0, 0]
-    height: 200
-    width: 200
-    duration: 1
-5:
-  steps:
-  - type: ImageStimulus
-    image_paths_from: "[stimuli[0]]"
-    position: [0, 0]
-    height: 200
-    width: 200
-    duration: 1
-6:
-  steps:
-  - type: ImageStimulus
-    image_paths_from: "[stimuli[0]]"
-    position: [0, 0]
-    height: 200
-    width: 200
-    duration: 1
+stimuli:
+  fixation:
+    type: "TextStimulus"
+    text: "+"
+    pos: [0, 0]
+    color: "white"
+    opacity: 1.0
+    autodraw: True
+
+  stim_left:
+    type: "TextStimulus"
+    text: "A"
+    pos: [-200, 0]
+    color: "white"
+
+  stim_right:
+    type: "TextStimulus"
+    text: "B"
+    pos: [200, 0]
+    color: "white"
+
+  reward:
+    type: "TextStimulus"
+    text: "+"
+    pos: [0, 50]
+    color: "white"
+
+
+templates:
+  trial_start:
+    duration: 3.0
+    render:
+      - stim: "fixation"
+        onset: 0.0
+        duration: 0.5
+
+      - stim: "stim_left"
+        onset: 0.5
+        duration: 2.5
+
+      - stim: "stim_right"
+        onset: 0.5
+        duration: 2.5
+
+    periods:
+      - name: base
+        onset: 0.0
+        duration: 0.5
+        label: 'fixation'
+        rllabel: 'obs'
+
+      - name: "response"
+        onset: 0.5
+        duration: 2.5
+        listen_for_keys: ["left", "right"]
+        label: 'response'
+
+  feedback:
+    duration: 1.0
+    render:
+      - stim: "reward"
+        onset: 0.0
+        duration: 1.0
+
+    periods:
+      - name: base
+        onset: 0.0
+        duration: 1.0
+        label: 'reward'
+        rllabel: 'reward'
+
+
+episodes:
+  - index: 0
+    use: "trial_start"
+
+  - index: 1
+    use: "feedback"
+    hooks:
+      - name: RewardHook
+        optiona: "test"
+
+  - index: 2
+    use: "feedback"
+    hooks:
+      - "RewardHook"
